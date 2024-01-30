@@ -212,6 +212,9 @@ function love.keypressed(key, isrepeat)
     if key == '3' then 
         new_game(15, 15, true) 
     end
+    if key == 's' then
+        print_known()
+    end
 end
 
 -- mouse stuff
@@ -274,3 +277,25 @@ function pop_history()
     item = table.remove(history)
     user_grid[item[1]][item[2]] = item[3]
 end
+
+-- solver stuff
+function fill_col_range(col, a, b, fill)
+    for i = a, b do
+        user_grid[col][i] = fill
+    end
+end
+
+function fill_row_range(row, a, b, fill)
+    for i = a, b do
+        user_grid[i][row] = fill
+    end
+end
+
+function hint_weight(hint)
+    sum = 0
+    for i = 1, #hint do
+        sum = sum + hint[i]
+    end
+    return sum + #hint - 1
+end
+
